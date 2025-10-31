@@ -6,7 +6,7 @@
 ---
 
 ## 🌤 Live Demo
-👉 **[https://jinnymoon0.github.io/yourmood](https://jinnymoon0.github.io/yourmood)**
+👉 **[[https://jinnymoon0.github.io/yourmood](https://jinnymoon0.github.io/yourmood](https://jinnymoon0.github.io/YourMood/))**
 
 YourMood is a bilingual (English / Korean) web app that lets you record your **daily mood, thoughts, and activities** — then view them beautifully visualized on a calendar with emoji summaries.
 
