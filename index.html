@@ -2,744 +2,491 @@
 <html lang="en">
 <head>
 <meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>YourMood — Daily Mood, QOTD & Calendar Report</title>
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>YourMood — Daily Log & Monthly Report</title>
 <style>
-<<<<<<< HEAD
   :root{
-    --bg:#fafafa; --fg:#1f2937; --muted:#6b7280; --card:#ffffff; --line:#e5e7eb;
-    --accent:#8b5cf6; --accent-2:#22c55e; --danger:#ef4444;
+    --bg:#fafafa; --fg:#222; --muted:#6b7280; --card:#fff; --brand:#ffcd4a; --brand-2:#ffb100;
+    --ok:#22c55e; --warn:#ef4444; --chip:#f3f4f6; --chip-on:#111827; --chip-on-fg:#fff;
+    --ring:rgba(0,0,0,.08);
   }
   *{box-sizing:border-box}
-  body{margin:0;font-family:ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto;background:var(--bg);color:var(--fg)}
-  header{position:sticky;top:0;background:var(--card);border-bottom:1px solid var(--line);padding:10px 16px;display:flex;align-items:center;gap:10px;z-index:10}
-  header h1{font-size:18px;margin:0;font-weight:700}
-  header .spacer{flex:1}
-  header .user-pill{font-size:12px;color:var(--muted)}
-  main{max-width:1100px;margin:24px auto;padding:0 16px;display:grid;gap:20px;grid-template-columns: 420px 1fr}
-  .card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px;box-shadow:0 1px 2px rgba(0,0,0,.03)}
-  .section-title{margin:0 0 12px 0;font-size:14px;color:var(--muted);letter-spacing:.2px}
-  .row{display:flex;gap:12px;margin-top:12px}
-  textarea,input[type=text]{width:100%;border:1px solid var(--line);border-radius:10px;padding:10px;font-size:14px;background:#fff}
-  input[type=search], select{border:1px solid var(--line);border-radius:10px;padding:8px 10px;background:#fff}
-  .actions{display:flex;gap:8px;align-items:center;margin-top:12px}
-  button{border:1px solid var(--line);background:#fff;border-radius:12px;padding:10px 14px;cursor:pointer}
-  .btn-primary{background:var(--accent);color:#fff;border:none}
-  .btn-ghost{background:#fff}
-  .hint{font-size:12px;color:var(--muted)}
-  .status{font-size:13px;margin-top:6px}
-  /* Emoji picker */
-  .emoji-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:8px;margin-top:8px}
-  .emoji-btn{font-size:24px;line-height:1;border:1px solid var(--line);border-radius:12px;background:#fff;cursor:pointer;padding:10px 0;transition:transform .05s}
-  .emoji-btn:active{transform:scale(.98)}
-  .emoji-btn.selected{outline:2px solid var(--accent)}
-  .legend{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
-  .legend span{font-size:12px;color:var(--muted);border:1px solid var(--line);border-radius:999px;padding:4px 8px;background:#fff}
-  /* Tag chips */
-  .chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px}
-  .chip-btn{border:1px solid var(--line);background:#fff;border-radius:999px;padding:6px 10px;font-size:12px;cursor:pointer}
-  .chip-btn.active{background:#eef2ff;border-color:#c7d2fe}
-  /* Calendar */
-  .cal-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:8px}
-  .cal-title{font-weight:700}
-  .cal-nav{display:flex;gap:8px}
-  .cal-nav button{padding:8px 10px;border-radius:10px}
-  .cal-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:6px}
-  .dow{font-size:12px;color:var(--muted);text-align:center;margin-bottom:4px}
-  .day{background:#fff;border:1px solid var(--line);border-radius:12px;min-height:84px;padding:6px;display:flex;flex-direction:column}
-  .day .head{display:flex;align-items:center;justify-content:space-between}
-  .day .date{font-size:12px;color:var(--muted)}
-  .day .today{color:#000;background:#eef2ff;border-radius:8px;padding:0 6px}
-  .day .body{flex:1;display:flex;align-items:center;justify-content:center;font-size:24px}
-  .day.muted{opacity:.45}
-  /* Stats bar (simple, no external libs) */
-  .stats{margin-top:12px}
-  .stat-row{display:flex;align-items:center;gap:8px;margin:6px 0}
-  .stat-emoji{width:28px;text-align:center}
-  .stat-bar-wrap{flex:1;height:12px;background:#f3f4f6;border-radius:999px;overflow:hidden;border:1px solid var(--line)}
-  .stat-bar{height:100%;background:#c7d2fe}
-  .stat-count{font-size:12px;color:var(--muted);min-width:28px;text-align:right}
-  /* Filters bar */
-  .filters{display:flex;gap:8px;flex-wrap:wrap;margin:8px 0 12px}
-  .filters .pill{border:1px solid var(--line);border-radius:999px;padding:6px 10px;font-size:12px;background:#fff;cursor:pointer}
-  .filters .pill.active{background:#dcfce7;border-color:#bbf7d0}
-  @media (max-width:900px){ main{grid-template-columns:1fr} }
-=======
-  :root {
-    --bg:#fafafa; --fg:#1f2937; --muted:#6b7280; --card:#ffffff; --line:#e5e7eb;
-    --accent:#8b5cf6; --accent-2:#22c55e; --danger:#ef4444;
+  body{font-family:system-ui,-apple-system,Segoe UI,Roboto,Apple Color Emoji,Segoe UI Emoji,sans-serif;
+       background:var(--bg); color:var(--fg); margin:0; padding:24px}
+  .wrap{max-width:1100px; margin:0 auto; display:grid; grid-template-columns:360px 1fr; gap:20px}
+  header{display:flex; align-items:center; gap:8px; margin-bottom:8px}
+  .logo{font-size:22px}
+  .app{background:var(--card); border-radius:16px; box-shadow:0 1px 4px var(--ring)}
+  .section{padding:18px 18px 8px}
+  .section h3{margin:8px 0 10px}
+  .row{display:flex; align-items:center; gap:10px}
+  .muted{color:var(--muted); font-size:13px}
+  .btn{background:var(--brand); border:none; padding:10px 14px; border-radius:10px; cursor:pointer; font-weight:600}
+  .btn:hover{background:var(--brand-2)}
+  .btn-outline{background:#fff;border:1px solid #e5e7eb}
+  .pill{padding:6px 10px;border-radius:999px; background:var(--chip); cursor:pointer; user-select:none}
+  .pill.on{background:var(--chip-on); color:var(--chip-on-fg)}
+  input[type=text], textarea, select{
+    width:100%; border:1px solid #e5e7eb; border-radius:10px; padding:8px 10px; font-size:14px;
+    background:#fff;
   }
-  * { box-sizing:border-box; }
-  body { margin:0; font-family:ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto; background:var(--bg); color:var(--fg); }
-  header { position:sticky; top:0; background:var(--card); border-bottom:1px solid var(--line); padding:10px 16px; display:flex; align-items:center; gap:10px; z-index:10; }
-  header h1 { font-size:18px; margin:0; font-weight:700; }
-  header .spacer { flex:1; }
-  header .user-pill { font-size:12px; color:var(--muted); }
-  main { max-width:1100px; margin:24px auto; padding:0 16px; display:grid; gap:20px; grid-template-columns:420px 1fr; }
-  .card { background:var(--card); border:1px solid var(--line); border-radius:16px; padding:16px; box-shadow:0 1px 2px rgba(0,0,0,.03); }
-  .section-title { margin:0 0 12px 0; font-size:14px; color:var(--muted); letter-spacing:.2px; }
-  textarea,input[type=text] { width:100%; border:1px solid var(--line); border-radius:10px; padding:10px; font-size:14px; background:#fff; }
-  button { border:1px solid var(--line); background:#fff; border-radius:12px; padding:10px 14px; cursor:pointer; }
-  .btn-primary { background:var(--accent); color:#fff; border:none; }
-  .hint { font-size:12px; color:var(--muted); }
-  .emoji-grid { display:grid; grid-template-columns:repeat(6,1fr); gap:8px; margin-top:8px; }
-  .emoji-btn { font-size:24px; line-height:1; border:1px solid var(--line); border-radius:12px; background:#fff; cursor:pointer; padding:10px 0; transition:transform .05s; }
-  .emoji-btn:active { transform:scale(.98); }
-  .emoji-btn.selected { outline:2px solid var(--accent); }
-  @media(max-width:900px){ main{grid-template-columns:1fr;} }
->>>>>>> de70de5 (YourMood: publish via GitHub Pages + Cloudflare Worker telehook)
+  textarea{min-height:80px; resize:vertical}
+  .grid2{display:grid; grid-template-columns:1fr 1fr; gap:14px}
+  .emoji-grid{display:grid; grid-template-columns:repeat(auto-fill,minmax(46px,1fr)); gap:8px; margin-top:8px}
+  .emoji{font-size:26px; line-height:46px; text-align:center; border-radius:12px; background:#fff; border:1px solid #eee; cursor:pointer; user-select:none}
+  .emoji:hover{transform:scale(1.06)}
+  .emoji.sel{outline:3px solid #fde68a}
+  .bar{display:flex; align-items:center; gap:8px; justify-content:space-between}
+  .calendar{padding:0 18px 18px}
+  .cal-head{display:flex; align-items:center; justify-content:space-between; padding:8px 0}
+  .cal-grid{display:grid; grid-template-columns:repeat(7, 1fr); gap:8px}
+  .dow{font-size:12px; color:var(--muted); text-align:center}
+  .cell{background:#fff; border:1px solid #eee; border-radius:12px; min-height:76px; padding:6px; position:relative; cursor:pointer}
+  .cell.today{border-color:#ffcd4a}
+  .cell .d{font-size:13px; color:#6b7280}
+  .dot{position:absolute; right:8px; bottom:8px; width:12px; height:12px; border-radius:50%}
+  .legend{display:flex; gap:8px; flex-wrap:wrap; padding:6px 0 10px}
+  .stat{padding:10px 14px; background:#fff; border:1px solid #eee; border-radius:12px}
+  .chips{display:flex; gap:8px; flex-wrap:wrap}
+  .lock{font-size:12px; color:#f97316; font-weight:700}
+  .right-card{padding-bottom:18px}
+  .divider{height:1px; background:#f1f5f9; margin:10px 0}
+  .help{padding:0 18px 12px}
+  .right-fixed{position:sticky; top:16px}
+  @media (max-width:980px){ .wrap{grid-template-columns:1fr} .right-fixed{position:static} }
 </style>
 </head>
 <body>
-<header>
-  <h1>🫶 YourMood</h1>
-  <div class="spacer"></div>
-  <div class="user-pill" id="userPill">Signing in…</div>
-</header>
+  <header class="bar" style="max-width:1100px;margin:0 auto 12px;">
+    <div class="row">
+      <div class="logo">🟡</div>
+      <strong>YourMood</strong>
+      <span class="muted">Daily Log • Monthly Report</span>
+    </div>
+    <div class="row muted">
+      <span id="status" class="muted">Ready</span>
+    </div>
+  </header>
 
-<main>
-<<<<<<< HEAD
-  <!-- LEFT: Mood input + QOTD + Tags -->
-  <section class="card">
-    <h2 class="section-title">How are you feeling today?</h2>
+  <div class="wrap">
+    <!-- LEFT: Monthly report + calendar -->
+    <div class="app">
+      <div class="section">
+        <h3>Monthly Report</h3>
+        <div class="chips" id="tagChips"></div>
+        <div class="legend" id="legend"></div>
+        <div class="grid2">
+          <div class="stat"><b id="statEntries">0</b><div class="muted">entries this month</div></div>
+          <div class="stat"><b id="statTopTag">—</b><div class="muted">top tag</div></div>
+        </div>
+      </div>
 
-    <div id="emojiGrid" class="emoji-grid" aria-label="Choose your mood"></div>
-    <div class="legend" id="legend"></div>
+      <div class="calendar">
+        <div class="cal-head">
+          <button class="btn btn-outline" id="prevMonth">◀</button>
+          <div><b id="monthTitle">Month YYYY</b></div>
+          <div class="row">
+            <button class="btn btn-outline" id="todayBtn">Today</button>
+            <button class="btn btn-outline" id="nextMonth">▶</button>
+          </div>
+        </div>
+        <div class="cal-grid" id="dow">
+          <div class="dow">Sun</div><div class="dow">Mon</div><div class="dow">Tue</div><div class="dow">Wed</div><div class="dow">Thu</div><div class="dow">Fri</div><div class="dow">Sat</div>
+        </div>
+        <div class="cal-grid" id="calGrid"></div>
+        <div class="help muted">Per-day save. Click any date to load & edit that day.</div>
+      </div>
+    </div>
 
-    <!-- QOTD -->
-    <div class="row" style="margin-top:14px">
-      <div style="width:100%">
-        <div class="section-title" id="qotdLabel">Question of the Day</div>
-        <div id="qotdText" style="font-size:14px;margin-bottom:6px"></div>
-        <textarea id="qotdAnswer" rows="2" placeholder="Your answer… (optional)"></textarea>
-        <div class="row" style="margin-top:8px;align-items:center">
-          <label class="hint"><input id="qotdRequired" type="checkbox" /> require answer before saving</label>
-          <div class="spacer"></div>
-          <select id="languageSelect" title="Language">
-            <option value="auto">Auto</option>
-            <option value="en">English</option>
-            <option value="ko">한국어</option>
-          </select>
+    <!-- RIGHT: Editor -->
+    <div class="app right-fixed right-card">
+      <div class="section">
+        <div class="bar">
+          <h3 id="editorDate">Today</h3>
+          <div class="row">
+            <label class="muted" style="display:flex;align-items:center;gap:6px;">
+              <input type="checkbox" id="lockAfterSave"> Lock after save
+            </label>
+          </div>
+        </div>
+
+        <div>
+          <label>Mood</label>
+          <div class="emoji-grid" id="emojiGrid"></div>
+        </div>
+
+        <div class="divider"></div>
+
+        <div class="grid2">
+          <div>
+            <label>Question of the Day *</label>
+            <input id="qod" type="text" readonly />
+          </div>
+          <div>
+            <label>Require answer</label>
+            <select id="requireMode">
+              <option value="auto">Auto</option>
+              <option value="on">On</option>
+              <option value="off">Off</option>
+            </select>
+          </div>
+        </div>
+
+        <label style="margin-top:14px;">Your Answer *</label>
+        <textarea id="answer" placeholder="Type your answer…"></textarea>
+
+        <div class="grid2" style="margin-top:14px;">
+          <div>
+            <label>Tags (comma-separated)</label>
+            <input id="tags" type="text" placeholder="work, school, home…" />
+          </div>
+          <div>
+            <label>Quick Tags</label>
+            <div class="chips" id="quickTags"></div>
+          </div>
+        </div>
+
+        <label style="margin-top:14px;">Optional Notes</label>
+        <textarea id="note" placeholder="Why did you feel this way? Any context…"></textarea>
+
+        <div class="bar" style="margin-top:14px;">
+          <div class="row">
+            <button class="btn" id="saveBtn">💾 Save</button>
+            <button class="btn btn-outline" id="unlockBtn" title="Enable editing if entry is locked">Unlock</button>
+          </div>
+          <div class="muted" id="lockBadge" style="display:none;"><span class="lock">Locked</span></div>
         </div>
       </div>
     </div>
+  </div>
 
-    <!-- Tags -->
-    <div class="row">
-      <div style="width:100%">
-        <div class="section-title">Tags</div>
-        <div id="presetChips" class="chips"></div>
-        <input id="tags" type="text" placeholder="Custom tags (comma separated)" />
-      </div>
-    </div>
+<script>
+/* =========================
+   Data & Utilities
+========================= */
+const EMOJIS = [
+  "😀","😄","😁","😆","😊","😍","🤗","😌","😴","🤔",
+  "😕","😞","😢","😭","😠","😤","😡","😩","😫","😱",
+  "🤩","😇","😶‍🌫️","😐","😎","🥰","🥲","😤","😤","🥳"
+];
+const TAGS = ["all","work","school","home","friends","gathering","outdoors","travel","family","study","health","exercise","food","music","weather","stress","calm","finance","love","project"];
+const QUICK_TAGS = ["work","school","home","friends","gathering","outdoors","study","health","exercise","family"];
+const MOOD_COLORS = {
+  "😀":"#22c55e","😄":"#22c55e","😁":"#16a34a","😆":"#10b981","😊":"#84cc16",
+  "😍":"#f59e0b","🤗":"#f59e0b","😌":"#60a5fa","😴":"#a78bfa","🤔":"#93c5fd",
+  "😕":"#fca5a5","😞":"#f87171","😢":"#ef4444","😭":"#dc2626","😠":"#ef4444",
+  "😤":"#fb923c","😡":"#b91c1c","😩":"#f97316","😫":"#ea580c","😱":"#f43f5e",
+  "🤩":"#eab308","😇":"#fde047","😶‍🌫️":"#94a3b8","😐":"#9ca3af","😎":"#06b6d4","🥰":"#fb7185","🥲":"#60a5fa","🥳":"#f59e0b"
+};
+const QOD_LIST = [
+  "What made you smile today?",
+  "One thing you’re grateful for?",
+  "Who did you think about today, and why?",
+  "What challenged you today?",
+  "What energized you?",
+  "A small win you had?",
+  "What would you like to improve tomorrow?",
+  "Where did you spend most of your time?",
+  "Which song matched your mood?",
+  "What’s one kind thing you did?",
+  "What stressed you today?",
+  "What gave you peace today?",
+  "What are you proud of today?",
+  "What surprised you today?",
+  "What did you learn today?",
+  "How did you care for yourself?",
+  "What did you avoid today?",
+  "What did you finish today?",
+  "What gave you hope today?",
+  "What’s a word for today?"
+];
+const LS_KEY = "yourmood.entries.v1";
 
-    <div class="row">
-      <textarea id="note" rows="3" placeholder="Optional note (e.g., why you felt this way)"></textarea>
-    </div>
+const $ = (sel) => document.querySelector(sel);
+const $$ = (sel) => Array.from(document.querySelectorAll(sel));
 
-    <div class="actions">
-      <button id="saveBtn" class="btn-primary">Save Today’s Mood</button>
-      <span class="hint">Per-day save. Click a calendar day to load/edit.</span>
-    </div>
-    <div id="status" class="status"></div>
-  </section>
+const todayKey = () => new Date().toISOString().slice(0,10);
+const toKey = (d) => d.toISOString().slice(0,10);
+const fromLS = () => JSON.parse(localStorage.getItem(LS_KEY) || "{}");
+const toLS = (o) => localStorage.setItem(LS_KEY, JSON.stringify(o));
 
-  <!-- RIGHT: Calendar report + Filters + Stats -->
-  <section class="card">
-    <div class="cal-header">
-      <div>
-        <div class="section-title">Monthly Report</div>
-        <div class="cal-title" id="calTitle">Month YYYY</div>
-      </div>
-      <div class="cal-nav">
-        <button id="prevMonth" class="btn-ghost">◀</button>
-        <button id="todayMonth" class="btn-ghost">Today</button>
-        <button id="nextMonth" class="btn-ghost">▶</button>
-      </div>
-    </div>
+function hashDay(iso){
+  // deterministic index for QOD per day
+  let h = 0;
+  for (const ch of iso) h = (h*31 + ch.charCodeAt(0)) % 2147483647;
+  return h;
+}
 
-    <!-- Filters -->
-    <div class="filters">
-      <span class="pill" data-filter="all" id="filterAll" aria-pressed="true">All</span>
-      <span class="pill" data-filter="work">work</span>
-      <span class="pill" data-filter="school">school</span>
-      <span class="pill" data-filter="home">home</span>
-      <span class="pill" data-filter="friends">friends</span>
-      <span class="pill" data-filter="gathering">gathering</span>
-      <span class="pill" data-filter="outdoors">outdoors</span>
-    </div>
+/* =========================
+   State
+========================= */
+let state = {
+  monthCursor: new Date(new Date().getFullYear(), new Date().getMonth(), 1),
+  selectedDay: todayKey(),
+  filterTag: "all",
+  requireMode: localStorage.getItem("requireMode") || "auto"
+};
 
-    <div class="cal-grid" id="dow">
-      <div class="dow">Sun</div><div class="dow">Mon</div><div class="dow">Tue</div>
-      <div class="dow">Wed</div><div class="dow">Thu</div><div class="dow">Fri</div><div class="dow">Sat</div>
-    </div>
-    <div class="cal-grid" id="calGrid" aria-live="polite"></div>
+/* =========================
+   UI: Calendar & Report
+========================= */
+const calGrid = $("#calGrid");
+const monthTitle = $("#monthTitle");
+const tagChips = $("#tagChips");
+const legend = $("#legend");
+const statEntries = $("#statEntries");
+const statTopTag = $("#statTopTag");
 
-    <div class="section-title" style="margin-top:10px">This Month</div>
-    <div id="stats" class="stats"></div>
-  </section>
-</main>
-
-<!-- Firebase (v10 modular CDN) -->
-<script type="module">
-  /*************** 1) Firebase setup ***************/
-  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.4/firebase-app.js";
-  import { getAuth, onAuthStateChanged, signInAnonymously } from "https://www.gstatic.com/firebasejs/10.12.4/firebase-auth.js";
-  import { getFirestore, doc, setDoc, getDocs, getDoc, collection, query, where, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.12.4/firebase-firestore.js";
-
-=======
-  <section class="card">
-    <h2 class="section-title">How are you feeling today?</h2>
-    <div id="emojiGrid" class="emoji-grid"></div>
-
-    <div class="section-title" style="margin-top:16px">Question of the Day</div>
-    <div id="qotdText" style="font-size:14px;margin-bottom:6px"></div>
-    <textarea id="qotdAnswer" rows="2" placeholder="Your answer..."></textarea>
-
-    <div class="section-title" style="margin-top:16px">Tags</div>
-    <input id="tags" type="text" placeholder="Custom tags (comma separated)" />
-
-    <div class="section-title" style="margin-top:16px">Note</div>
-    <textarea id="note" rows="3" placeholder="Optional note"></textarea>
-
-    <div class="actions" style="margin-top:12px">
-      <button id="saveBtn" class="btn-primary">Save Today’s Mood</button>
-    </div>
-    <div id="status" class="hint" style="margin-top:6px"></div>
-  </section>
-
-  <section class="card">
-    <h2 class="section-title">Monthly Report</h2>
-    <div id="calGrid" style="display:grid;grid-template-columns:repeat(7,1fr);gap:6px;"></div>
-  </section>
-</main>
-
-<script type="module">
-  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.4/firebase-app.js";
-  import { getAuth, onAuthStateChanged, signInAnonymously } from "https://www.gstatic.com/firebasejs/10.12.4/firebase-auth.js";
-  import { getFirestore, doc, setDoc, getDocs, collection, query, where, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.12.4/firebase-firestore.js";
-
-  // ===== Firebase Setup =====
->>>>>>> de70de5 (YourMood: publish via GitHub Pages + Cloudflare Worker telehook)
-  const firebaseConfig = {
-    apiKey: "AIzaSyBB3ITad6IYprc-8j5fpHnhjVRq0UFotdo",
-    authDomain: "yourmood-e4e10.firebaseapp.com",
-    projectId: "yourmood-e4e10",
-<<<<<<< HEAD
-    storageBucket: "yourmood-e4e10.firebasestorage.app",
-    messagingSenderId: "895278921175",
-    appId: "1:895278921175:web:21ec3a33d5b5d17ca44792"
-  };
-
-=======
-    storageBucket: "yourmood-e4e10.appspot.com",
-    messagingSenderId: "895278921175",
-    appId: "1:895278921175:web:21ec3a33d5b5d17ca44792"
-  };
->>>>>>> de70de5 (YourMood: publish via GitHub Pages + Cloudflare Worker telehook)
-  const app = initializeApp(firebaseConfig);
-  const auth = getAuth(app);
-  const db = getFirestore(app);
-
-<<<<<<< HEAD
-  /*************** 2) Data model ***************/
-  const EMOJIS = [
-    {key:"joy",   emoji:"😊", label:"Joy / Content"},
-    {key:"happy", emoji:"😄", label:"Happy"},
-    {key:"laugh", emoji:"😆", label:"Laughing"},
-    {key:"calm",  emoji:"😌", label:"Calm"},
-    {key:"love",  emoji:"🥰", label:"Loved"},
-    {key:"proud", emoji:"😎", label:"Proud"},
-    {key:"motiv", emoji:"💪", label:"Motivated"},
-    {key:"focus", emoji:"🧠", label:"Focused"},
-    {key:"ok",    emoji:"🙂", label:"Okay"},
-    {key:"meh",   emoji:"😐", label:"Meh"},
-    {key:"tired", emoji:"🥱", label:"Tired"},
-    {key:"sad",   emoji:"😢", label:"Sad"},
-    {key:"anx",   emoji:"😰", label:"Anxious"},
-    {key:"angry", emoji:"😠", label:"Angry"},
-    {key:"stress",emoji:"😫", label:"Stressed"},
-    {key:"sick",  emoji:"🤒", label:"Sick"},
-    {key:"overw", emoji:"😵", label:"Overwhelmed"},
-    {key:"lonely",emoji:"🥺", label:"Lonely"},
-    {key:"busy",  emoji:"🏃‍♀️", label:"Busy"},
-    {key:"party", emoji:"🎉", label:"Celebration"},
-    {key:"walk",  emoji:"🚶‍♀️", label:"Walk/Outdoors"},
-    {key:"study", emoji:"📚", label:"Studying"},
-    {key:"work",  emoji:"💼", label:"Work"},
-    {key:"home",  emoji:"🏠", label:"Home"},
-    {key:"coffee",emoji:"☕️", label:"Coffee"},
-    {key:"rain",  emoji:"🌧️", label:"Rainy mood"},
-    {key:"sun",   emoji:"☀️", label:"Sunny mood"},
-  ];
-
-  const PRESET_TAGS = ["work","school","home","friends","gathering","outdoors"];
-
-  // QOTD pool (EN/KR pairs). Rotates by date index.
-  const QOTD = [
-    {en:"What was the most intense feeling you noticed today?", ko:"오늘 가장 강하게 느꼈던 감정은 무엇이었나요?"},
-    {en:"What gave you energy—and what drained it?", ko:"오늘 에너지를 준 것은 무엇이고, 빼앗은 것은 무엇이었나요?"},
-    {en:"Who did you connect with today, and how did it feel?", ko:"오늘 누구와 연결감을 느꼈나요? 그때 어떤 기분이었나요?"},
-    {en:"What small thing are you grateful for right now?", ko:"지금 이 순간 고마운 사소한 일은 무엇인가요?"},
-    {en:"What would you like tomorrow-you to remember from today?", ko:"내일의 내가 오늘로부터 기억했으면 하는 것은 무엇인가요?"},
-  ];
-
-  /*************** 3) DOM refs ***************/
-  const $ = (id)=>document.getElementById(id);
-  const userPill = $("userPill");
-  const emojiGrid = $("emojiGrid");
-  const legend = $("legend");
-  const noteEl = $("note");
-  const tagsEl = $("tags");
-  const saveBtn = $("saveBtn");
-  const statusEl = $("status");
-  const qotdText = $("qotdText");
-  const qotdAnswer = $("qotdAnswer");
-  const qotdRequired = $("qotdRequired");
-  const languageSelect = $("languageSelect");
-  const presetChips = $("presetChips");
-
-  const calTitle = $("calTitle");
-  const calGrid = $("calGrid");
-  const statsEl = $("stats");
-  const prevMonthBtn = $("prevMonth");
-  const nextMonthBtn = $("nextMonth");
-  const todayMonthBtn = $("todayMonth");
-  const filterAll = $("filterAll");
-  let activeFilter = "all";
-
-  /*************** 4) State ***************/
-  let currentUser = null;
-  let selectedKey = null;
-  let viewYear, viewMonth; // month: 0-based
-
-  /*************** 5) Helpers ***************/
-  function ymd(d){
-    const yyyy = d.getFullYear();
-    const mm = String(d.getMonth()+1).padStart(2,"0");
-    const dd = String(d.getDate()).padStart(2,"0");
-    return `${yyyy}-${mm}-${dd}`;
-  }
-  function monthLabel(y,m){ return new Date(y,m,1).toLocaleDateString(undefined,{year:"numeric",month:"long"}); }
-  function startOfMonth(y,m){ return new Date(y,m,1); }
-  function endOfMonth(y,m){ return new Date(y,m+1,0); }
-  function sameYMD(a,b){ return a.getFullYear()===b.getFullYear() && a.getMonth()===b.getMonth() && a.getDate()===b.getDate(); }
-
-  function moodsColRef(uid){ return collection(db, "users", uid, "moods"); }
-
-  function getLang(){
-    const choice = languageSelect.value;
-    if(choice==="en" || choice==="ko") return choice;
-    const sys = (navigator.language||"en").toLowerCase();
-    return sys.startsWith("ko") ? "ko" : "en";
-  }
-
-  function getQOTDForDate(date){
-    const index = Math.abs(Math.floor(new Date(date.getFullYear(), date.getMonth(), date.getDate()).getTime()/86400000)) % QOTD.length;
-    const lang = getLang();
-    const item = QOTD[index];
-    return lang==="ko" ? item.ko : item.en;
-  }
-
-  function renderQOTD(date){
-    qotdText.textContent = getQOTDForDate(date);
-  }
-
-  function buildEmojiPicker(){
-    emojiGrid.innerHTML = "";
-    EMOJIS.forEach(item=>{
-      const btn = document.createElement("button");
-      btn.className = "emoji-btn";
-      btn.title = item.label;
-      btn.setAttribute("data-key", item.key);
-      btn.textContent = item.emoji;
-      btn.addEventListener("click", ()=>{
-        selectedKey = item.key;
-        document.querySelectorAll(".emoji-btn").forEach(b=>b.classList.remove("selected"));
-        btn.classList.add("selected");
-      });
-      emojiGrid.appendChild(btn);
-    });
-    legend.innerHTML = "";
-    EMOJIS.slice(0,8).forEach(item=>{
-      const chip = document.createElement("span");
-      chip.textContent = `${item.emoji} ${item.label}`;
-      legend.appendChild(chip);
-    });
-  }
-
-  function buildPresetChips(){
-    presetChips.innerHTML = "";
-    PRESET_TAGS.forEach(tag=>{
-      const btn = document.createElement("button");
-      btn.className = "chip-btn";
-      btn.textContent = tag;
-      btn.addEventListener("click", ()=>{
-        btn.classList.toggle("active");
-        // Ensure text input reflects selected presets
-        const current = tagsEl.value.split(",").map(s=>s.trim()).filter(Boolean);
-        const set = new Set(current);
-        if(btn.classList.contains("active")) set.add(tag); else set.delete(tag);
-        tagsEl.value = Array.from(set).join(", ");
-      });
-      presetChips.appendChild(btn);
-    });
-  }
-
-  function collectTags(){
-    const typed = tagsEl.value.split(",").map(t=>t.trim()).filter(Boolean);
-    const presetSel = Array.from(presetChips.querySelectorAll(".chip-btn.active")).map(b=>b.textContent);
-    // merge unique
-    return Array.from(new Set([...typed, ...presetSel]));
-  }
-=======
-  // ===== Telegram Worker URL =====
-  const TELEHOOK_URL = "https://yourmood-telehook.jinnymoon0.workers.dev";
-
-  // ===== Elements =====
-  const userPill = document.getElementById("userPill");
-  const emojiGrid = document.getElementById("emojiGrid");
-  const qotdText = document.getElementById("qotdText");
-  const qotdAnswer = document.getElementById("qotdAnswer");
-  const tagsEl = document.getElementById("tags");
-  const noteEl = document.getElementById("note");
-  const saveBtn = document.getElementById("saveBtn");
-  const statusEl = document.getElementById("status");
-
-  // ===== Data =====
-  const EMOJIS = ["🤩","😊","🙂","😐","🥱","😢","😠","😣","😰","🤒","🙏","❤️"];
-
-  function getQOTD(){
-    const q = [
-      "What was the most intense emotion today?",
-      "What gave you a moment of joy?",
-      "What drained your energy?",
-      "What are you grateful for right now?",
-      "What would make tomorrow 10% better?"
-    ];
-    const idx = Math.floor((new Date()).getDate() % q.length);
-    return q[idx];
-  }
-
-  // ===== UI =====
-  function renderEmojis(){
-    emojiGrid.innerHTML = "";
-    EMOJIS.forEach(e=>{
-      const btn = document.createElement("button");
-      btn.className = "emoji-btn";
-      btn.textContent = e;
-      btn.addEventListener("click", ()=>{
-        document.querySelectorAll(".emoji-btn").forEach(b=>b.classList.remove("selected"));
-        btn.classList.add("selected");
-        selectedMood = e;
-      });
-      emojiGrid.appendChild(btn);
-    });
-  }
-
-  let selectedMood = null;
-  qotdText.textContent = getQOTD();
-  renderEmojis();
-
-  // ===== Telegram Notify =====
-  async function notifyTelegram(payload) {
-    try {
-      await fetch(TELEHOOK_URL, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(payload),
-      });
-    } catch (err) {
-      console.warn("Telegram notification failed:", err);
-    }
-  }
-
-  // ===== Save Mood =====
-  saveBtn.addEventListener("click", async ()=>{
-    if (!currentUser) return flash("Not signed in yet", false);
-    if (!selectedMood) return flash("Please pick a mood", false);
-    const today = new Date();
-    const date = today.toISOString().slice(0,10);
-    const payload = {
-      date,
-      emoji: selectedMood,
-      tags: tagsEl.value.split(",").map(t=>t.trim()).filter(Boolean),
-      note: noteEl.value.trim(),
-      qotd: { q: qotdText.textContent, a: qotdAnswer.value.trim() },
-      createdAt: serverTimestamp()
-    };
-    await setDoc(doc(collection(db, "users", currentUser.uid, "moods"), date), payload, { merge:true });
-    flash("Saved ✅", true);
-
-    // Notify Telegram
-    notifyTelegram({
-      event: "mood",
-      username: currentUser.uid.slice(0,8),
-      uid: currentUser.uid,
-      mood: { dayId: date, emoji: selectedMood, tags: payload.tags, note: payload.note }
-    });
-  });
->>>>>>> de70de5 (YourMood: publish via GitHub Pages + Cloudflare Worker telehook)
-
-  function flash(msg, ok=true){
-    statusEl.style.color = ok ? "inherit" : "var(--danger)";
-    statusEl.textContent = msg;
-<<<<<<< HEAD
-    setTimeout(()=>{ statusEl.textContent=""; }, 3000);
-  }
-
-  /*************** 6) Firestore ***************/
-  async function saveToday(uid){
-    if(!selectedKey){ throw new Error("Please select an emoji."); }
-    if(qotdRequired.checked && !qotdAnswer.value.trim()){
-      throw new Error("Please answer the Question of the Day (toggle off ‘require’ to skip).");
-    }
-    const today = new Date();
-    const id = ymd(today);
-    const item = EMOJIS.find(e=>e.key===selectedKey);
-    const payload = {
-      date: id,
-      moodKey: item.key,
-      moodEmoji: item.emoji,
-      note: noteEl.value.trim() || null,
-      tags: collectTags(),
-      qotd: { question: getQOTDForDate(today), answer: qotdAnswer.value.trim() || null },
-      updatedAt: serverTimestamp(),
-      createdAt: serverTimestamp(),
-    };
-    await setDoc(doc(moodsColRef(uid), id), payload, { merge: true });
-    return { id, payload };
-  }
-
-  async function fetchMonth(uid, y, m){
-    const from = ymd(startOfMonth(y,m));
-    const to = ymd(endOfMonth(y,m));
-    const q1 = query(moodsColRef(uid), where("date", ">=", from), where("date", "<=", to));
-    const snap = await getDocs(q1);
-    const map = {};
-    snap.forEach(d=>{ map[d.id] = d.data(); });
-    return map;
-  }
-
-  async function fetchDay(uid, id){
-    const ref = doc(moodsColRef(uid), id);
-    const snap = await getDoc(ref);
-    return snap.exists() ? snap.data() : null;
-  }
-
-  /*************** 7) Calendar + Stats ***************/
-  async function renderCalendar(){
-    if(!currentUser) return;
-    calTitle.textContent = monthLabel(viewYear, viewMonth);
-    calGrid.innerHTML = "";
-
-    const first = startOfMonth(viewYear, viewMonth);
-    const last = endOfMonth(viewYear, viewMonth);
-    const firstWeekday = first.getDay();
-    const daysInMonth = last.getDate();
-
-    const monthData = await fetchMonth(currentUser.uid, viewYear, viewMonth);
-    const today = new Date();
-
-    // Leading blanks
-    for(let i=0;i<firstWeekday;i++){
-      const cell = document.createElement("div");
-      cell.className = "day muted";
-      cell.innerHTML = `<div class="head"><span class="date"></span></div><div class="body"></div>`;
-      calGrid.appendChild(cell);
-    }
-
-    // Days
-    for(let d=1; d<=daysInMonth; d++){
-      const dateObj = new Date(viewYear, viewMonth, d);
-      const id = ymd(dateObj);
-      const entry = monthData[id];
-
-      // Filter logic by tag
-      let hiddenByFilter = false;
-      if(activeFilter!=="all"){
-        const tags = entry?.tags || [];
-        hiddenByFilter = !tags.map(t=>t.toLowerCase()).includes(activeFilter);
-      }
-
-      const cell = document.createElement("div");
-      cell.className = "day" + (hiddenByFilter ? " muted" : "");
-      const isToday = sameYMD(dateObj, today);
-
-      const head = document.createElement("div");
-      head.className = "head";
-      const dateSpan = document.createElement("span");
-      dateSpan.className = "date" + (isToday ? " today" : "");
-      dateSpan.textContent = d;
-      head.appendChild(dateSpan);
-
-      const body = document.createElement("div");
-      body.className = "body";
-      body.textContent = entry?.moodEmoji || "";
-
-      cell.appendChild(head);
-      cell.appendChild(body);
-
-      cell.addEventListener("click", async ()=>{
-        // Load the day's entry (if any) into the left panel to edit
-        const data = await fetchDay(currentUser.uid, id);
-        if(data){
-          selectedKey = data.moodKey;
-          document.querySelectorAll(".emoji-btn").forEach(b=>b.classList.remove("selected"));
-          const btn = document.querySelector(`.emoji-btn[data-key="${selectedKey}"]`);
-          if(btn) btn.classList.add("selected");
-          noteEl.value = data.note || "";
-          // tags (preset + text)
-          const tagSet = new Set((data.tags||[]).map(t=>t.toLowerCase()));
-          presetChips.querySelectorAll(".chip-btn").forEach(b=>{
-            const on = tagSet.has(b.textContent.toLowerCase());
-            b.classList.toggle("active", on);
-          });
-          // Text field includes any non-preset tags
-          const others = (data.tags||[]).filter(t=>!PRESET_TAGS.includes(t.toLowerCase()));
-          tagsEl.value = others.join(", ");
-          qotdAnswer.value = data.qotd?.answer || "";
-          renderQOTD(dateObj);
-          window.scrollTo({top:0,behavior:"smooth"});
-          flash("Loaded this day’s entry. Edit and Save to update.");
-        }else{
-          selectedKey = null;
-          document.querySelectorAll(".emoji-btn").forEach(b=>b.classList.remove("selected"));
-          noteEl.value = "";
-          presetChips.querySelectorAll(".chip-btn").forEach(b=>b.classList.remove("active"));
-          tagsEl.value = "";
-          qotdAnswer.value = "";
-          renderQOTD(dateObj);
-          flash("No entry for this day yet. Pick an emoji and Save.");
-        }
-      });
-
-      calGrid.appendChild(cell);
-    }
-
-    // Trailing blanks
-    const totalCells = firstWeekday + daysInMonth;
-    const trailing = (7 - (totalCells % 7)) % 7;
-    for(let i=0;i<trailing;i++){
-      const cell = document.createElement("div");
-      cell.className = "day muted";
-      cell.innerHTML = `<div class="head"><span class="date"></span></div><div class="body"></div>`;
-      calGrid.appendChild(cell);
-    }
-
-    // Stats (frequency + tiny bars)
-    const counts = {};
-    Object.values(monthData).forEach(v=>{
-      // respect filters here too
-      if(activeFilter!=="all"){
-        const has = (v.tags||[]).map(t=>t.toLowerCase()).includes(activeFilter);
-        if(!has) return;
-      }
-      counts[v.moodEmoji] = (counts[v.moodEmoji]||0)+1;
-    });
-
-    statsEl.innerHTML = "";
-    if(Object.keys(counts).length===0){
-      statsEl.innerHTML = `<div class="hint">No entries yet for this filter/month.</div>`;
-    }else{
-      const entries = Object.entries(counts).sort((a,b)=>b[1]-a[1]);
-      const max = entries[0][1];
-      entries.forEach(([emoji,c])=>{
-        const row = document.createElement("div");
-        row.className = "stat-row";
-        const em = document.createElement("div"); em.className="stat-emoji"; em.textContent = emoji;
-        const wrap = document.createElement("div"); wrap.className="stat-bar-wrap";
-        const bar = document.createElement("div"); bar.className="stat-bar"; bar.style.width = (c/max*100).toFixed(0)+"%";
-        const cnt = document.createElement("div"); cnt.className="stat-count"; cnt.textContent = `× ${c}`;
-        wrap.appendChild(bar);
-        row.appendChild(em); row.appendChild(wrap); row.appendChild(cnt);
-        statsEl.appendChild(row);
-      });
-    }
-  }
-
-  /*************** 8) Events ***************/
-  // Save
-  saveBtn.addEventListener("click", async ()=>{
-    try{
-      if(!currentUser) throw new Error("Not signed in yet.");
-      await saveToday(currentUser.uid);
-      flash("Saved today’s mood ✅", true);
-      await renderCalendar();
-    }catch(err){
-      console.error(err);
-      flash(err.message || "Failed to save.", false);
-    }
-  });
-
-  // Month nav
-  prevMonthBtn.addEventListener("click", ()=>{
-    const d = new Date(viewYear, viewMonth-1, 1);
-    viewYear = d.getFullYear(); viewMonth = d.getMonth();
-    renderCalendar();
-  });
-  nextMonthBtn.addEventListener("click", ()=>{
-    const d = new Date(viewYear, viewMonth+1, 1);
-    viewYear = d.getFullYear(); viewMonth = d.getMonth();
-    renderCalendar();
-  });
-  todayMonthBtn.addEventListener("click", ()=>{
-    const now = new Date();
-    viewYear = now.getFullYear(); viewMonth = now.getMonth();
-    renderCalendar();
-  });
-
-  // Filters (tag)
-  document.querySelectorAll(".filters .pill").forEach(p=>{
-    p.addEventListener("click", ()=>{
-      document.querySelectorAll(".filters .pill").forEach(x=>x.classList.remove("active"));
-      p.classList.add("active");
-      activeFilter = p.dataset.filter;
+function renderTagChips(){
+  tagChips.innerHTML = "";
+  TAGS.forEach(t=>{
+    const el = document.createElement("div");
+    el.className = "pill" + (t===state.filterTag?" on":"");
+    el.textContent = t;
+    el.addEventListener("click", ()=>{
+      state.filterTag = t;
       renderCalendar();
+      renderReport();
+      renderLegend();
     });
+    tagChips.appendChild(el);
   });
-  filterAll.classList.add("active");
+}
+function renderLegend(){
+  legend.innerHTML = "";
+  const used = new Set(Object.values(fromLS()).map(e=>e.mood));
+  EMOJIS.forEach(m=>{
+    if(!MOOD_COLORS[m]) return;
+    const chip = document.createElement("div");
+    chip.className = "pill";
+    chip.innerHTML = `<span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:${MOOD_COLORS[m]};margin-right:6px;vertical-align:middle"></span>${m}`;
+    legend.appendChild(chip);
+  });
+}
 
-  // Language change
-  languageSelect.addEventListener("change", ()=>renderQOTD(new Date()));
+function renderCalendar(){
+  const d0 = new Date(state.monthCursor);
+  const year = d0.getFullYear(), month = d0.getMonth();
+  monthTitle.textContent = d0.toLocaleString(undefined,{month:"long", year:"numeric"});
 
-  /*************** 9) Auth boot ***************/
-  onAuthStateChanged(auth, async (user)=>{
-    if(user){
-      currentUser = user;
-      userPill.textContent = `UID: ${user.uid.slice(0,8)}… (anonymous)`;
-      const now = new Date();
-      viewYear = now.getFullYear(); viewMonth = now.getMonth();
-      buildEmojiPicker();
-      buildPresetChips();
-      renderQOTD(now);
-      await renderCalendar();
-    }else{
-      userPill.textContent = "Signing in…";
-      // Firebase Console → Authentication → Sign-in method → Anonymous (Enable)
-=======
-    setTimeout(()=>statusEl.textContent="", 2500);
+  // build grid
+  calGrid.innerHTML = "";
+  const first = new Date(year, month, 1);
+  const startCol = first.getDay();
+  const daysInMonth = new Date(year, month+1, 0).getDate();
+
+  // leading blanks
+  for(let i=0;i<startCol;i++){
+    const blank = document.createElement("div");
+    calGrid.appendChild(blank);
   }
 
-  // ===== Auth =====
-  let currentUser = null;
-  onAuthStateChanged(auth, async user=>{
-    if(user){
-      currentUser = user;
-      userPill.textContent = `UID: ${user.uid.slice(0,8)}…`;
+  const data = fromLS();
+  for(let day=1; day<=daysInMonth; day++){
+    const d = new Date(year, month, day);
+    const key = toKey(d);
+    const cell = document.createElement("div");
+    cell.className = "cell" + (key===todayKey() ? " today": "");
+    cell.innerHTML = `<div class="d">${day}</div>`;
+    const entry = data[key];
 
-      // Send login notification
-      notifyTelegram({
-        event: "login",
-        username: user.uid.slice(0,8),
-        uid: user.uid
+    // filter by tag when drawing dot
+    let showDot = !!entry;
+    if (showDot && state.filterTag!=="all"){
+      const tags = (entry.tags || "").split(",").map(s=>s.trim()).filter(Boolean);
+      showDot = tags.includes(state.filterTag);
+    }
+    if (showDot && entry && entry.mood){
+      const dot = document.createElement("div");
+      dot.className = "dot";
+      dot.style.background = MOOD_COLORS[entry.mood] || "#94a3b8";
+      cell.appendChild(dot);
+    }
+
+    cell.addEventListener("click", ()=>{
+      state.selectedDay = key;
+      loadEditorForDay(key);
+      $("#editorDate").textContent = new Date(key).toLocaleDateString(undefined,{weekday:"short", month:"short", day:"numeric"});
+      flashStatus(`Loaded ${key}`);
+    });
+
+    calGrid.appendChild(cell);
+  }
+}
+
+function renderReport(){
+  const data = fromLS();
+  const year = state.monthCursor.getFullYear();
+  const month = state.monthCursor.getMonth();
+  let cnt = 0;
+  const tagCount = {};
+  Object.entries(data).forEach(([k,e])=>{
+    const d = new Date(k);
+    if (d.getFullYear()===year && d.getMonth()===month){
+      // filter tag
+      if (state.filterTag!=="all"){
+        const tags = (e.tags || "").split(",").map(s=>s.trim()).filter(Boolean);
+        if (!tags.includes(state.filterTag)) return;
+      }
+      cnt++;
+      (e.tags || "").split(",").map(s=>s.trim()).filter(Boolean).forEach(t=>{
+        tagCount[t] = (tagCount[t]||0)+1;
       });
-    }else{
-      userPill.textContent = "Signing in…";
->>>>>>> de70de5 (YourMood: publish via GitHub Pages + Cloudflare Worker telehook)
-      await signInAnonymously(auth);
     }
   });
+  statEntries.textContent = cnt;
+  const top = Object.entries(tagCount).sort((a,b)=>b[1]-a[1])[0];
+  statTopTag.textContent = top ? `${top[0]} (${top[1]})` : "—";
+}
+
+/* =========================
+   UI: Editor
+========================= */
+const emojiGrid = $("#emojiGrid");
+const qod = $("#qod");
+const answer = $("#answer");
+const tags = $("#tags");
+const note = $("#note");
+const saveBtn = $("#saveBtn");
+const unlockBtn = $("#unlockBtn");
+const requireModeSel = $("#requireMode");
+const lockAfterSave = $("#lockAfterSave");
+const lockBadge = $("#lockBadge");
+const quickTags = $("#quickTags");
+
+function renderEmojis(selected){
+  emojiGrid.innerHTML = "";
+  EMOJIS.forEach(e=>{
+    const div = document.createElement("div");
+    div.className = "emoji" + (selected===e ? " sel":"");
+    div.textContent = e;
+    div.title = "Select mood";
+    div.onclick = () => {
+      $$(".emoji").forEach(x=>x.classList.remove("sel"));
+      div.classList.add("sel");
+      div.dataset.sel = "1";
+      div.blur();
+    };
+    emojiGrid.appendChild(div);
+  });
+}
+function selectedEmoji(){
+  const el = $(".emoji.sel");
+  return el ? el.textContent : null;
+}
+function setSelectedEmoji(m){
+  $$(".emoji").forEach(x=>x.classList.remove("sel"));
+  if (!m) return;
+  const el = Array.from($$(".emoji")).find(x=>x.textContent===m);
+  if (el) el.classList.add("sel");
+}
+function renderQuickTags(){
+  quickTags.innerHTML = "";
+  QUICK_TAGS.forEach(t=>{
+    const el = document.createElement("div");
+    el.className = "pill";
+    el.textContent = t;
+    el.onclick = ()=>{
+      const list = new Set(tags.value.split(",").map(s=>s.trim()).filter(Boolean));
+      if (list.has(t)) list.delete(t); else list.add(t);
+      tags.value = Array.from(list).join(", ");
+    };
+    quickTags.appendChild(el);
+  });
+}
+function loadEditorForDay(key){
+  const data = fromLS();
+  const e = data[key] || {};
+  renderEmojis(e.mood);
+  tags.value = e.tags || "";
+  note.value = e.note || "";
+  answer.value = e.answer || "";
+  requireModeSel.value = localStorage.getItem("requireMode") || "auto";
+  lockAfterSave.checked = !!e.locked;
+  lockBadge.style.display = e.locked ? "block":"none";
+  setInputsDisabled(!!e.locked);
+
+  // deterministic QOD by date
+  const idx = hashDay(key) % QOD_LIST.length;
+  qod.value = QOD_LIST[idx];
+}
+function setInputsDisabled(disabled){
+  [answer, tags, note, saveBtn, ...$$(".emoji")].forEach(el=>{
+    el.disabled = disabled;
+    if (disabled) el.classList.add("disabled"); else el.classList.remove("disabled");
+  });
+}
+function validateBeforeSave(key){
+  const mode = requireModeSel.value;
+  localStorage.setItem("requireMode", mode);
+  const needAnswer = (mode==="on") || (mode==="auto" && qod.value.trim().length>0);
+  if (!selectedEmoji()) return "Please select a mood.";
+  if (needAnswer && !answer.value.trim()) return "Please answer the Question of the Day.";
+  return null;
+}
+function flashStatus(t){
+  const el = $("#status");
+  el.textContent = t;
+  el.style.opacity = "1";
+  setTimeout(()=>{ el.style.opacity = ".75"; }, 1200);
+}
+
+/* =========================
+   Events
+========================= */
+$("#prevMonth").onclick = ()=>{ state.monthCursor = new Date(state.monthCursor.getFullYear(), state.monthCursor.getMonth()-1, 1); renderCalendar(); renderReport(); };
+$("#nextMonth").onclick = ()=>{ state.monthCursor = new Date(state.monthCursor.getFullYear(), state.monthCursor.getMonth()+1, 1); renderCalendar(); renderReport(); };
+$("#todayBtn").onclick = ()=>{ state.monthCursor = new Date(new Date().getFullYear(), new Date().getMonth(), 1); state.selectedDay = todayKey(); loadEditorForDay(state.selectedDay); renderCalendar(); renderReport(); $("#editorDate").textContent = "Today"; };
+
+saveBtn.onclick = ()=>{
+  const key = state.selectedDay;
+  const err = validateBeforeSave(key);
+  if (err){ alert(err); return; }
+  const data = fromLS();
+  data[key] = {
+    date: key,
+    mood: selectedEmoji(),
+    question: qod.value,
+    answer: answer.value.trim(),
+    tags: tags.value.trim(),
+    note: note.value.trim(),
+    locked: !!lockAfterSave.checked
+  };
+  toLS(data);
+  if (lockAfterSave.checked){ setInputsDisabled(true); lockBadge.style.display="block"; }
+  renderCalendar(); renderReport();
+  flashStatus("Saved ✅");
+};
+
+unlockBtn.onclick = ()=>{
+  const key = state.selectedDay;
+  const data = fromLS();
+  if (!data[key]) return;
+  data[key].locked = false;
+  toLS(data);
+  setInputsDisabled(false);
+  lockAfterSave.checked = false;
+  lockBadge.style.display="none";
+  flashStatus("Unlocked ✨");
+};
+
+requireModeSel.onchange = ()=>{
+  localStorage.setItem("requireMode", requireModeSel.value);
+};
+
+/* =========================
+   Boot
+========================= */
+(function init(){
+  renderTagChips();
+  renderLegend();
+  renderReport();
+  renderQuickTags();
+  $("#editorDate").textContent = "Today";
+  state.selectedDay = todayKey();
+  loadEditorForDay(state.selectedDay);
+  renderCalendar();
+})();
 </script>
 </body>
 </html>
