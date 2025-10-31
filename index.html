@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>YourMood — Daily Mood, QOTD & Calendar Report</title>
 <style>
+<<<<<<< HEAD
   :root{
     --bg:#fafafa; --fg:#1f2937; --muted:#6b7280; --card:#ffffff; --line:#e5e7eb;
     --accent:#8b5cf6; --accent-2:#22c55e; --danger:#ef4444;
@@ -63,6 +64,30 @@
   .filters .pill{border:1px solid var(--line);border-radius:999px;padding:6px 10px;font-size:12px;background:#fff;cursor:pointer}
   .filters .pill.active{background:#dcfce7;border-color:#bbf7d0}
   @media (max-width:900px){ main{grid-template-columns:1fr} }
+=======
+  :root {
+    --bg:#fafafa; --fg:#1f2937; --muted:#6b7280; --card:#ffffff; --line:#e5e7eb;
+    --accent:#8b5cf6; --accent-2:#22c55e; --danger:#ef4444;
+  }
+  * { box-sizing:border-box; }
+  body { margin:0; font-family:ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto; background:var(--bg); color:var(--fg); }
+  header { position:sticky; top:0; background:var(--card); border-bottom:1px solid var(--line); padding:10px 16px; display:flex; align-items:center; gap:10px; z-index:10; }
+  header h1 { font-size:18px; margin:0; font-weight:700; }
+  header .spacer { flex:1; }
+  header .user-pill { font-size:12px; color:var(--muted); }
+  main { max-width:1100px; margin:24px auto; padding:0 16px; display:grid; gap:20px; grid-template-columns:420px 1fr; }
+  .card { background:var(--card); border:1px solid var(--line); border-radius:16px; padding:16px; box-shadow:0 1px 2px rgba(0,0,0,.03); }
+  .section-title { margin:0 0 12px 0; font-size:14px; color:var(--muted); letter-spacing:.2px; }
+  textarea,input[type=text] { width:100%; border:1px solid var(--line); border-radius:10px; padding:10px; font-size:14px; background:#fff; }
+  button { border:1px solid var(--line); background:#fff; border-radius:12px; padding:10px 14px; cursor:pointer; }
+  .btn-primary { background:var(--accent); color:#fff; border:none; }
+  .hint { font-size:12px; color:var(--muted); }
+  .emoji-grid { display:grid; grid-template-columns:repeat(6,1fr); gap:8px; margin-top:8px; }
+  .emoji-btn { font-size:24px; line-height:1; border:1px solid var(--line); border-radius:12px; background:#fff; cursor:pointer; padding:10px 0; transition:transform .05s; }
+  .emoji-btn:active { transform:scale(.98); }
+  .emoji-btn.selected { outline:2px solid var(--accent); }
+  @media(max-width:900px){ main{grid-template-columns:1fr;} }
+>>>>>>> de70de5 (YourMood: publish via GitHub Pages + Cloudflare Worker telehook)
 </style>
 </head>
 <body>
@@ -73,6 +98,7 @@
 </header>
 
 <main>
+<<<<<<< HEAD
   <!-- LEFT: Mood input + QOTD + Tags -->
   <section class="card">
     <h2 class="section-title">How are you feeling today?</h2>
@@ -161,19 +187,61 @@
   import { getAuth, onAuthStateChanged, signInAnonymously } from "https://www.gstatic.com/firebasejs/10.12.4/firebase-auth.js";
   import { getFirestore, doc, setDoc, getDocs, getDoc, collection, query, where, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.12.4/firebase-firestore.js";
 
+=======
+  <section class="card">
+    <h2 class="section-title">How are you feeling today?</h2>
+    <div id="emojiGrid" class="emoji-grid"></div>
+
+    <div class="section-title" style="margin-top:16px">Question of the Day</div>
+    <div id="qotdText" style="font-size:14px;margin-bottom:6px"></div>
+    <textarea id="qotdAnswer" rows="2" placeholder="Your answer..."></textarea>
+
+    <div class="section-title" style="margin-top:16px">Tags</div>
+    <input id="tags" type="text" placeholder="Custom tags (comma separated)" />
+
+    <div class="section-title" style="margin-top:16px">Note</div>
+    <textarea id="note" rows="3" placeholder="Optional note"></textarea>
+
+    <div class="actions" style="margin-top:12px">
+      <button id="saveBtn" class="btn-primary">Save Today’s Mood</button>
+    </div>
+    <div id="status" class="hint" style="margin-top:6px"></div>
+  </section>
+
+  <section class="card">
+    <h2 class="section-title">Monthly Report</h2>
+    <div id="calGrid" style="display:grid;grid-template-columns:repeat(7,1fr);gap:6px;"></div>
+  </section>
+</main>
+
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.4/firebase-app.js";
+  import { getAuth, onAuthStateChanged, signInAnonymously } from "https://www.gstatic.com/firebasejs/10.12.4/firebase-auth.js";
+  import { getFirestore, doc, setDoc, getDocs, collection, query, where, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.12.4/firebase-firestore.js";
+
+  // ===== Firebase Setup =====
+>>>>>>> de70de5 (YourMood: publish via GitHub Pages + Cloudflare Worker telehook)
   const firebaseConfig = {
     apiKey: "AIzaSyBB3ITad6IYprc-8j5fpHnhjVRq0UFotdo",
     authDomain: "yourmood-e4e10.firebaseapp.com",
     projectId: "yourmood-e4e10",
+<<<<<<< HEAD
     storageBucket: "yourmood-e4e10.firebasestorage.app",
     messagingSenderId: "895278921175",
     appId: "1:895278921175:web:21ec3a33d5b5d17ca44792"
   };
 
+=======
+    storageBucket: "yourmood-e4e10.appspot.com",
+    messagingSenderId: "895278921175",
+    appId: "1:895278921175:web:21ec3a33d5b5d17ca44792"
+  };
+>>>>>>> de70de5 (YourMood: publish via GitHub Pages + Cloudflare Worker telehook)
   const app = initializeApp(firebaseConfig);
   const auth = getAuth(app);
   const db = getFirestore(app);
 
+<<<<<<< HEAD
   /*************** 2) Data model ***************/
   const EMOJIS = [
     {key:"joy",   emoji:"😊", label:"Joy / Content"},
@@ -324,10 +392,99 @@
     // merge unique
     return Array.from(new Set([...typed, ...presetSel]));
   }
+=======
+  // ===== Telegram Worker URL =====
+  const TELEHOOK_URL = "https://yourmood-telehook.jinnymoon0.workers.dev";
+
+  // ===== Elements =====
+  const userPill = document.getElementById("userPill");
+  const emojiGrid = document.getElementById("emojiGrid");
+  const qotdText = document.getElementById("qotdText");
+  const qotdAnswer = document.getElementById("qotdAnswer");
+  const tagsEl = document.getElementById("tags");
+  const noteEl = document.getElementById("note");
+  const saveBtn = document.getElementById("saveBtn");
+  const statusEl = document.getElementById("status");
+
+  // ===== Data =====
+  const EMOJIS = ["🤩","😊","🙂","😐","🥱","😢","😠","😣","😰","🤒","🙏","❤️"];
+
+  function getQOTD(){
+    const q = [
+      "What was the most intense emotion today?",
+      "What gave you a moment of joy?",
+      "What drained your energy?",
+      "What are you grateful for right now?",
+      "What would make tomorrow 10% better?"
+    ];
+    const idx = Math.floor((new Date()).getDate() % q.length);
+    return q[idx];
+  }
+
+  // ===== UI =====
+  function renderEmojis(){
+    emojiGrid.innerHTML = "";
+    EMOJIS.forEach(e=>{
+      const btn = document.createElement("button");
+      btn.className = "emoji-btn";
+      btn.textContent = e;
+      btn.addEventListener("click", ()=>{
+        document.querySelectorAll(".emoji-btn").forEach(b=>b.classList.remove("selected"));
+        btn.classList.add("selected");
+        selectedMood = e;
+      });
+      emojiGrid.appendChild(btn);
+    });
+  }
+
+  let selectedMood = null;
+  qotdText.textContent = getQOTD();
+  renderEmojis();
+
+  // ===== Telegram Notify =====
+  async function notifyTelegram(payload) {
+    try {
+      await fetch(TELEHOOK_URL, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
+      });
+    } catch (err) {
+      console.warn("Telegram notification failed:", err);
+    }
+  }
+
+  // ===== Save Mood =====
+  saveBtn.addEventListener("click", async ()=>{
+    if (!currentUser) return flash("Not signed in yet", false);
+    if (!selectedMood) return flash("Please pick a mood", false);
+    const today = new Date();
+    const date = today.toISOString().slice(0,10);
+    const payload = {
+      date,
+      emoji: selectedMood,
+      tags: tagsEl.value.split(",").map(t=>t.trim()).filter(Boolean),
+      note: noteEl.value.trim(),
+      qotd: { q: qotdText.textContent, a: qotdAnswer.value.trim() },
+      createdAt: serverTimestamp()
+    };
+    await setDoc(doc(collection(db, "users", currentUser.uid, "moods"), date), payload, { merge:true });
+    flash("Saved ✅", true);
+
+    // Notify Telegram
+    notifyTelegram({
+      event: "mood",
+      username: currentUser.uid.slice(0,8),
+      uid: currentUser.uid,
+      mood: { dayId: date, emoji: selectedMood, tags: payload.tags, note: payload.note }
+    });
+  });
+>>>>>>> de70de5 (YourMood: publish via GitHub Pages + Cloudflare Worker telehook)
 
   function flash(msg, ok=true){
     statusEl.style.color = ok ? "inherit" : "var(--danger)";
     statusEl.textContent = msg;
+<<<<<<< HEAD
     setTimeout(()=>{ statusEl.textContent=""; }, 3000);
   }
 
@@ -560,6 +717,26 @@
     }else{
       userPill.textContent = "Signing in…";
       // Firebase Console → Authentication → Sign-in method → Anonymous (Enable)
+=======
+    setTimeout(()=>statusEl.textContent="", 2500);
+  }
+
+  // ===== Auth =====
+  let currentUser = null;
+  onAuthStateChanged(auth, async user=>{
+    if(user){
+      currentUser = user;
+      userPill.textContent = `UID: ${user.uid.slice(0,8)}…`;
+
+      // Send login notification
+      notifyTelegram({
+        event: "login",
+        username: user.uid.slice(0,8),
+        uid: user.uid
+      });
+    }else{
+      userPill.textContent = "Signing in…";
+>>>>>>> de70de5 (YourMood: publish via GitHub Pages + Cloudflare Worker telehook)
       await signInAnonymously(auth);
     }
   });
